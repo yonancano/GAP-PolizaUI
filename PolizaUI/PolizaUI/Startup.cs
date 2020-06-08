@@ -50,7 +50,7 @@ namespace PolizaUI
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Polizas}/{action=Index}/{id?}");
+                    pattern: "{controller=Login}/{action=Index}/{id?}");
             });
         }
     }

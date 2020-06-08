@@ -60,45 +60,6 @@ namespace PolizaUI.Api
             return Poliza;
         }
 
-        public static async void AgreguePoliza(Poliza poliza)
-        {
-
-        }
-
-        public static async Task<bool> EditePoliza(Poliza poliza)
-        {
-            //validacion alta => 50%
-            using (var client = new HttpClient())
-            {
-                var content = new MultipartFormDataContent();
-                //content.Add(new StringContent(reservation.Id.ToString()), "Id");
-                //content.Add(new StringContent(reservation.Name), "Name");
-                //content.Add(new StringContent(reservation.StartLocation), "StartLocation");
-                //content.Add(new StringContent(reservation.EndLocation), "EndLocation");
-
-                using (var response = await client.PutAsync("/EditePoliza", content))
-                {
-                    string apiResponse = await response.Content.ReadAsStringAsync();
-                }
-            }
-            return true;
-        }
-
-        public static async Task<bool> EliminePoliza(int id)
-        {
-            using (var client = new HttpClient())
-            {
-                client.BaseAddress = new Uri(BaseUrl);
-                client.DefaultRequestHeaders.Clear();
-
-                using (var response = await client.DeleteAsync("/EliminePoliza" + id)) 
-                {
-                    string apiResponse = await response.Content.ReadAsStringAsync();
-                }
-            }
-            return true;
-        }
-
     }
 }
 

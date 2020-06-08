@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace PolizaUI.Api
@@ -14,44 +15,57 @@ namespace PolizaUI.Api
         //Hosted web API REST Service base url  
         private const string BaseUrl = "https://localhost:5001";
 
-        public static async Task<List<Poliza>> ObtengaCliente() 
+        public static async Task<Cliente> ObtengaCliente(int id)
         {
-            
-            List<Poliza> Polizas = new List<Poliza>();
+
+            Cliente Cliente = new Cliente();
 
             using (var client = new HttpClient())
             {
-                //Passing service base url  
                 client.BaseAddress = new Uri(BaseUrl);
-
                 client.DefaultRequestHeaders.Clear();
-                //Define request data format  
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                //Sending request to find web api REST service resource ObtengaPolizas using HttpClient  
-                HttpResponseMessage Res =  await client.GetAsync("/ObtengaPolizas");
+                var res = await client.GetAsync("/ObtengaCliente/"+id);
 
-                //Checking the response is successful or not which is sent using HttpClient  
-                if (Res.IsSuccessStatusCode)
+                if (res.IsSuccessStatusCode)
                 {
-                    //Storing the response details recieved from web api   
-                    var response = Res.Content.ReadAsStringAsync().Result;
-
-                    //Deserializing the response recieved from web api and storing into the Polizas list  
-                    Polizas = JsonConvert.DeserializeObject<List<Poliza>>(response);
+                    var response = await res.Content.ReadAsStringAsync();
+                    Cliente = JsonConvert.DeserializeObject<Cliente>(response);
                 }
             }
 
-            return Polizas;
+            return Cliente;
         }
 
-        public static void AsignarPoliza(Cliente cliente, Poliza poliza)
+        public static async void AsociarPoliza(int idCliente, Poliza poliza)
         {
+            //validacion alta => 50%
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(BaseUrl);
+                client.DefaultRequestHeaders.Clear();
+                StringContent content = new StringContent(JsonConvert.SerializeObject(poliza), Encoding.UTF8, "application/json");
+
+                using (var response = await client.PostAsync("/AsociarPoliza/"+idCliente, content))
+                {
+                    string apiResponse = await response.Content.ReadAsStringAsync();
+                }
+            }
         }
 
-        public static async Task<bool> CancelarPoliza(Poliza poliza)
+        public static async void CancelarPoliza(int idCliente, int idPoliza)
         {
-            return true;
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(BaseUrl);
+                client.DefaultRequestHeaders.Clear();
+
+                using (var response = await client.DeleteAsync("/EliminePoliza/" + idCliente+"/"+idPoliza))
+                {
+                    string apiResponse = await response.Content.ReadAsStringAsync();
+                }
+            }
         }
 
     }
