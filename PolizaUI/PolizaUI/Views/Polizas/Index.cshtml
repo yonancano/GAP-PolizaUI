@@ -20,75 +20,75 @@ else
 {
     <text>
 
-    <div class="container">
-        <div class="row">
-            <div class="table-responsive-sm">
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Nombre)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.TipoCubrimiento)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.PorcentajeCobertura)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.InicioVigencia)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.PeriodoCobertura)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Precio)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.TipoRiesgo)
-                            </th>
-                            <th>
-                                Acción
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var item in Model)
-                        {
+        <div class="container">
+            <div class="row">
+                <div class="table-responsive-sm">
+                    <table class="table table-bordered">
+                        <thead>
                             <tr>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Nombre)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.TipoCubrimiento)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.PorcentajeCobertura)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.InicioVigencia)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.PeriodoCobertura)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Precio)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.TipoRiesgo)
-                                </td>
-                                <td>
-                                    @Html.ActionLink("Editar", "Editar", new { @id = item.IdPoliza }) |
-                                    @Html.ActionLink("Detalles", "Detalles", new { @id = item.IdPoliza }) |
-                                    @Html.ActionLink("Eliminar", "Eliminar", new { @id = item.IdPoliza })
-                                </td>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Nombre)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.TipoCubrimiento)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.PorcentajeCobertura)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.InicioVigencia)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.PeriodoCobertura)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Precio)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.TipoRiesgo)
+                                </th>
+                                <th>
+                                    Acción
+                                </th>
                             </tr>
-                        }
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Nombre)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.TipoCubrimiento)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.PorcentajeCobertura)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.InicioVigencia)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.PeriodoCobertura)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Precio)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.TipoRiesgo)
+                                    </td>
+                                    <td>
+                                        @Html.ActionLink("Editar", "Editar", new { @id = item.IdPoliza }) |
+                                        @Html.ActionLink("Detalles", "Detalles", new { @id = item.IdPoliza }) |
+                                        @Html.ActionLink("Eliminar", "Eliminar", new { @id = item.IdPoliza })
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
             </div>
-        </div>
-    </div></text>
-    }
+        </div></text>
+}
 
 
