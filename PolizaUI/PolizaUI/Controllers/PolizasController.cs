@@ -63,12 +63,18 @@ namespace PolizaUI.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult Agregar(Poliza poliza)
         {
             try
             {
-                ServicioPoliza.AgregarPoliza(poliza);
+                if (ModelState.IsValid)
+                {
+                    ServicioPoliza.AgregarPoliza(poliza);
+                }
+                else
+                {
+                    return View(poliza);
+                }
             }
             catch (Exception)
             {
@@ -97,12 +103,18 @@ namespace PolizaUI.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult Editar(Poliza poliza)
         {
             try
             {
-                ServicioPoliza.EditarPoliza(poliza);
+                if (ModelState.IsValid)
+                {
+                    ServicioPoliza.EditarPoliza(poliza);
+                }
+                else
+                {
+                    return View(poliza);
+                }
             }
             catch
             {
@@ -130,7 +142,6 @@ namespace PolizaUI.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult Elimine(int id)
         {
             try

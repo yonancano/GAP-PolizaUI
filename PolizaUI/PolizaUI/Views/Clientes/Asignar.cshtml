@@ -8,7 +8,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Asignar" asp-route-IdCliente=@ViewBag.IDcliente method="post">
+        <form asp-action="Asignar" asp-route-IdCliente=@Model.IdCliente method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Nombre" class="control-label"></label>
@@ -51,7 +51,9 @@
                 <span asp-validation-for="TipoRiesgo" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="IdCliente" class="control-label"></label><strong> @ViewBag.IDcliente</strong>
+                <label asp-for="IdCliente" class="control-label"></label>
+                <strong>@Html.DisplayFor(model => model.IdCliente)</strong>
+                
             </div>
             <div class="form-group">
                 <input type="submit" value="Asignar" class="btn btn-primary" />

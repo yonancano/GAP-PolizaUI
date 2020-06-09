@@ -41,19 +41,24 @@ namespace PolizaUI.Controllers
 
         public ActionResult Asignar(int id)
         {
-            ViewBag.IDcliente = id;
-            return View();
+            var poliza = new Poliza() { IdCliente = id };
+            return View(poliza);
         }
 
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult Asignar(Poliza poliza)
         {
             try
             {
-                //validacion alta => 50%
-                ServicioPoliza.AsignarPoliza(poliza);
+                if (ModelState.IsValid)
+                {
+                    ServicioPoliza.AsignarPoliza(poliza);
+                }
+                else
+                {
+                    return View(poliza);
+                }
             }
             catch (Exception)
             {
@@ -65,7 +70,6 @@ namespace PolizaUI.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult Cancelar(int id)
         {
             try

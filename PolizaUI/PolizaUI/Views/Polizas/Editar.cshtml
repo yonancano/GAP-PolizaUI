@@ -8,68 +8,69 @@
 
 <hr />
 <div class="row">
-    <div class="col-md-4">
-        <form asp-action="Editar" method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <input asp-for="IdPoliza" class="form-control" type="hidden" />
-            </div>
-            <div class="form-group">
-                <label asp-for="Nombre" class="control-label"></label>
-                <input asp-for="Nombre" class="form-control" />
-                <span asp-validation-for="Nombre" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Descripcion" class="control-label"></label>
-                <input asp-for="Descripcion" class="form-control" />
-                <span asp-validation-for="Descripcion" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="TipoCubrimiento" class="control-label"></label>
-                <input asp-for="TipoCubrimiento" class="form-control" />
-                <span asp-validation-for="TipoCubrimiento" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="PorcentajeCobertura" class="control-label"></label>
-                <input asp-for="PorcentajeCobertura" class="form-control" />
-                <span asp-validation-for="PorcentajeCobertura" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="InicioVigencia" class="control-label"></label>
-                <input asp-for="InicioVigencia" class="form-control" />
-                <span asp-validation-for="InicioVigencia" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="PeriodoCobertura" class="control-label"></label>
-                <input asp-for="PeriodoCobertura" class="form-control" />
-                <span asp-validation-for="PeriodoCobertura" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Precio" class="control-label"></label>
-                <input asp-for="Precio" class="form-control" />
-                <span asp-validation-for="Precio" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="TipoRiesgo" class="control-label"></label>
-                <input asp-for="TipoRiesgo" class="form-control" />
-                <span asp-validation-for="TipoRiesgo" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="IdCliente" class="control-label"></label>
-                <input asp-for="IdCliente" class="form-control" />
-                <span asp-validation-for="IdCliente" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Guardar" class="btn btn-primary" />
-            </div>
-        </form>
     </div>
-</div>
+        <div class="col-md-4">
+            <form asp-action="Editar" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <input asp-for="IdPoliza" class="form-control" type="hidden" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="Nombre" class="control-label"></label>
+                    <input asp-for="Nombre" class="form-control" />
+                    <span asp-validation-for="Nombre" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Descripcion" class="control-label"></label>
+                    <input asp-for="Descripcion" class="form-control" />
+                    <span asp-validation-for="Descripcion" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="TipoCubrimiento" class="control-label"></label>
+                    <input asp-for="TipoCubrimiento" class="form-control" />
+                    <span asp-validation-for="TipoCubrimiento" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="PorcentajeCobertura" class="control-label"></label>
+                    <input asp-for="PorcentajeCobertura" class="form-control" />
+                    <span asp-validation-for="PorcentajeCobertura" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="InicioVigencia" class="control-label"></label>
+                    <input asp-for="InicioVigencia" class="form-control" />
+                    <span asp-validation-for="InicioVigencia" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="PeriodoCobertura" class="control-label"></label>
+                    <input asp-for="PeriodoCobertura" class="form-control" />
+                    <span asp-validation-for="PeriodoCobertura" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Precio" class="control-label"></label>
+                    <input asp-for="Precio" class="form-control" />
+                    <span asp-validation-for="Precio" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="TipoRiesgo" class="control-label"></label>
+                    <input asp-for="TipoRiesgo" class="form-control" />
+                    <span asp-validation-for="TipoRiesgo" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="IdCliente" class="control-label"></label>
+                    <input asp-for="IdCliente" class="form-control" />
+                    <span asp-validation-for="IdCliente" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Guardar" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
 
-<div>
-    <strong><a asp-action="Index">Ir al listado</a></strong>
-</div>
+    <div>
+        <strong><a asp-action="Index">Ir al listado</a></strong>
+    </div>
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }
