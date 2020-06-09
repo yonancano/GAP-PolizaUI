@@ -12,10 +12,12 @@ namespace PolizaUI.Models
 
         [Required(ErrorMessage = "Nombre es requerido")]
         [DisplayName("Nombre")]
+        [StringLength(60, MinimumLength = 8)]
         public string Nombre { get; set; }
 
         [Required(ErrorMessage = "Descripción es requerida")]
         [DisplayName("Descripción")]
+        [StringLength(200, MinimumLength = 15)]
         public string Descripcion { get; set; }
 
         [Required(ErrorMessage = "Tipo de cubrimiento es requerido")]

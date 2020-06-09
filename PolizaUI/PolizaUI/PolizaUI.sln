@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.30128.74
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PolizaUI", "PolizaUI.csproj", "{C20C570F-CEE0-4849-94AF-7272F9ED1859}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Poliza.UI-Test", "..\Poliza.UI-Test\Poliza.UI-Test.csproj", "{7418D89F-3771-420E-9E56-9D3F16A0B845}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{C20C570F-CEE0-4849-94AF-7272F9ED1859}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C20C570F-CEE0-4849-94AF-7272F9ED1859}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C20C570F-CEE0-4849-94AF-7272F9ED1859}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7418D89F-3771-420E-9E56-9D3F16A0B845}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7418D89F-3771-420E-9E56-9D3F16A0B845}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7418D89F-3771-420E-9E56-9D3F16A0B845}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7418D89F-3771-420E-9E56-9D3F16A0B845}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
