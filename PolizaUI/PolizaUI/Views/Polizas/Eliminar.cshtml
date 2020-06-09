@@ -4,8 +4,6 @@
     ViewData["Title"] = "Eliminar";
 }
 
-    <h1>Eliminar Póliza</h1>
-
 <h3>Esta seguro que desea eliminar la póliza?</h3>
 <div>
     <hr />
@@ -67,7 +65,9 @@
     </dl>
 
     <form asp-action="Elimine" method="post" asp-route-id=@Model.IdPoliza>
-        <input type="submit" value="Eliminar" class="btn btn-danger" /> 
-        <a asp-action="Index">Ir al listado</a>
+        <input type="submit" value="Eliminar" class="btn btn-danger" />
     </form>
+    <div>
+        <strong><a asp-action="Index">Ir al listado</a></strong>
+    </div>
 </div>

@@ -126,6 +126,66 @@ namespace PolizaUI.Api
 
             return Polizas;
         }
+
+        public static async void AgregarPoliza(Poliza poliza)
+        {
+            //validacion alta => 50%
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(BaseUrl);
+                client.DefaultRequestHeaders.Clear();
+                StringContent content = new StringContent(JsonConvert.SerializeObject(poliza), Encoding.UTF8, "application/json");
+
+                using (var response = await client.PostAsync("/AgreguePoliza", content))
+                {
+                    string apiResponse = await response.Content.ReadAsStringAsync();
+                }
+            }
+        }
+
+        public static async void EditarPoliza(Poliza poliza)
+        {
+            //validacion alta => 50%
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(BaseUrl);
+                client.DefaultRequestHeaders.Clear();
+                StringContent content = new StringContent(JsonConvert.SerializeObject(poliza), Encoding.UTF8, "application/json");
+
+                using (var response = await client.PutAsync("/EditePoliza", content))
+                {
+                    string apiResponse = await response.Content.ReadAsStringAsync();
+                }
+            }
+        }
+
+        public static async void EliminarPoliza(int id)
+        {
+            Poliza Poliza = new Poliza();
+
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(BaseUrl);
+                client.DefaultRequestHeaders.Clear();
+
+                //obtener poliza
+                var res = await client.GetAsync("/ObtenerPorId?id=" + id);
+
+                if (res.IsSuccessStatusCode)
+                {
+                    var response = await res.Content.ReadAsStringAsync();
+                    Poliza = JsonConvert.DeserializeObject<Poliza>(response);
+                }
+
+                //cancelar poliza
+                StringContent content = new StringContent(JsonConvert.SerializeObject(Poliza), Encoding.UTF8, "application/json");
+
+                using (var response = await client.PostAsync("/Eliminar", content))
+                {
+                    string apiResponse = await response.Content.ReadAsStringAsync();
+                }
+            }
+        }
     }
 }
 

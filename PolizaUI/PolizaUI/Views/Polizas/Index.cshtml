@@ -6,9 +6,13 @@
 
 <h1>Listado de Pólizas</h1>
 
-<p>
-    <a asp-action="Agregar">Nueva</a>
-</p>
+<div>
+    <form asp-action="Agregar" method="get">
+        <div class="form-group">
+            <button type="submit" class="btn btn-success">Agregar</button>
+        </div>
+    </form>
+</div>
 
 @if (!Model.Any())
 {
@@ -79,8 +83,6 @@ else
                                     </td>
                                     <td>
                                         <div class="btn-group-vertical">
-                                            @*<input type="button" class="btn btn-primary" value="Editar"
-                                                onclick="editar(@item.IdPoliza)" />*@
                                             @Html.ActionLink("Editar", "Editar", new { @id = item.IdPoliza })
                                             @Html.ActionLink("Detalles", "Detalles", new { @id = item.IdPoliza })
                                             @Html.ActionLink("Eliminar", "Eliminar", new { @id = item.IdPoliza })

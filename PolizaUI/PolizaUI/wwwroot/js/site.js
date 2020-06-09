@@ -1,5 +1,6 @@
 ﻿//ToDo: cambiar action links
 function editar(poliza) {
+    debugger;
     $.ajax({
         url: "/Polizas/Editar/",
         async: false,

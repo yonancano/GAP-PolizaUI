@@ -19,8 +19,6 @@ namespace PolizaUI.Controllers
     {
         private readonly ILogger<PolizasController> _logger;
         
-        private const string BaseUrl = "https://localhost:5001";
-
         public PolizasController(ILogger<PolizasController> logger)
         {
             _logger = logger;
@@ -44,7 +42,7 @@ namespace PolizaUI.Controllers
 
         public ActionResult Detalles(int id)
         {
-            Poliza Poliza;
+            Poliza Poliza = new Poliza();
 
             try
             {
@@ -66,22 +64,11 @@ namespace PolizaUI.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Agregar(Poliza poliza)
+        public ActionResult Agregar(Poliza poliza)
         {
             try
             {
-                //validacion alta => 50%
-                using (var client = new HttpClient())
-                {
-                    client.BaseAddress = new Uri(BaseUrl);
-                    client.DefaultRequestHeaders.Clear();
-                    StringContent content = new StringContent(JsonConvert.SerializeObject(poliza), Encoding.UTF8, "application/json");
-
-                    using (var response = await client.PostAsync("/AgreguePoliza", content))
-                    {
-                        string apiResponse = await response.Content.ReadAsStringAsync();
-                    }
-                }
+                ServicioPoliza.AgregarPoliza(poliza);
             }
             catch (Exception)
             {
@@ -92,26 +79,13 @@ namespace PolizaUI.Controllers
             return RedirectToAction("Index");
         }
 
-        public async Task<ActionResult> Editar(int id)
+        public ActionResult Editar(int id)
         {
             Poliza Poliza = new Poliza();
 
             try
             {
-                using (var client = new HttpClient())
-                {
-                    client.BaseAddress = new Uri(BaseUrl);
-                    client.DefaultRequestHeaders.Clear();
-                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-                    var res = await client.GetAsync("/ObtengaPoliza/" + id);
-
-                    if (res.IsSuccessStatusCode)
-                    {
-                        var response = await res.Content.ReadAsStringAsync();
-                        Poliza = JsonConvert.DeserializeObject<Poliza>(response);
-                    }
-                }
+                Poliza = ServicioPoliza.ObtengaPolizaPorId(id).Result;
             }
             catch (Exception)
             {
@@ -124,51 +98,27 @@ namespace PolizaUI.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Editar(Poliza poliza)
+        public ActionResult Editar(Poliza poliza)
         {
             try
             {
-                //validacion alta => 50%
-                using (var client = new HttpClient())
-                {
-                    client.BaseAddress = new Uri(BaseUrl);
-                    client.DefaultRequestHeaders.Clear();
-                    StringContent content = new StringContent(JsonConvert.SerializeObject(poliza), Encoding.UTF8, "application/json");
-
-                    using (var response = await client.PutAsync("/EditePoliza", content))
-                    {
-                        string apiResponse = await response.Content.ReadAsStringAsync();
-                    }
-                }
+                ServicioPoliza.EditarPoliza(poliza);
             }
             catch
             {
                 throw new NotImplementedException("No se completó la acción editar.");
             }
 
-            return Json(Url.Action("Index", "Polizas"));
+            return RedirectToAction("Index");
         }
 
-        public async Task<ActionResult> Eliminar(int id)
+        public ActionResult Eliminar(int id)
         {
             Poliza Poliza = new Poliza();
 
             try
             {
-                using (var client = new HttpClient())
-                {
-                    client.BaseAddress = new Uri(BaseUrl);
-                    client.DefaultRequestHeaders.Clear();
-                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-                    var res = await client.GetAsync("/ObtengaPoliza/" + id);
-
-                    if (res.IsSuccessStatusCode)
-                    {
-                        var response = await res.Content.ReadAsStringAsync();
-                        Poliza = JsonConvert.DeserializeObject<Poliza>(response);
-                    }
-                }
+                Poliza = ServicioPoliza.ObtengaPolizaPorId(id).Result;
             }
             catch (Exception)
             {
@@ -181,20 +131,11 @@ namespace PolizaUI.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Elimine(int id)
+        public ActionResult Elimine(int id)
         {
             try
             {
-                using (var client = new HttpClient())
-                {
-                    client.BaseAddress = new Uri(BaseUrl);
-                    client.DefaultRequestHeaders.Clear();
-
-                    using (var response = await client.DeleteAsync("/EliminePoliza/" + id))
-                    {
-                        string apiResponse = await response.Content.ReadAsStringAsync();
-                    }
-                }
+                ServicioPoliza.EliminarPoliza(id);
             }
             catch
             {
@@ -204,10 +145,10 @@ namespace PolizaUI.Controllers
             return RedirectToAction("Index");
         }
 
-        //[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        //public IActionResult Error()
-        //{
-        //    return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        //}
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
     }
 }

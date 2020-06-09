@@ -66,6 +66,12 @@
     </dl>
 </div>
 <div>
-    @Html.ActionLink("Editar", "Editar", new { @id = Model.IdPoliza }) |
-    <a asp-action="Index">Ir al listado</a>
+    <form asp-action="Editar" method="get" asp-route-id=@Model.IdPoliza>
+        <div class="form-group">
+            <button type="submit" class="btn btn-success">Editar</button>
+        </div>
+    </form>
+</div>
+<div>
+    <strong><a asp-action="Index">Ir al listado</a></strong>
 </div>
