@@ -146,7 +146,7 @@ namespace PolizaUI.Controllers
                 throw new NotImplementedException("No se completó la acción editar.");
             }
 
-            return RedirectToAction("Index");
+            return Json(Url.Action("Index", "Polizas"));
         }
 
         public async Task<ActionResult> Eliminar(int id)

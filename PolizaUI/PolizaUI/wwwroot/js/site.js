@@ -1,47 +1,14 @@
 ﻿//ToDo: cambiar action links
-function editar(IdPoliza) {
+function editar(poliza) {
     $.ajax({
-        url: "/Polizas/Editar/" + IdPoliza,
+        url: "/Polizas/Editar/",
         async: false,
-        type: "GET",
+        type: "POST",
         dataType: "json",
         contentType: "application/json; charset=utf-8",
-        data: IdPoliza
+        data: poliza,
+        success: function (data) {
+            window.location.href = data;
+        }
     });
-}
-
-function getAsociar(Cliente) {
-    $.get("/Clientes/Asociar", { Cliente: ModeloCliente(Cliente) });
-}
-
-
-function asociar(IdCliente, Poliza) {
-    $.post("Clientes/Asociar", { IdCliente: IdCliente, Poliza: ModeloPoliza(Poliza)});
-}
-
-function cancelar(IdCliente,IdPoliza) {
-    $.post("Clientes/Cancelar", { IdCliente: IdCliente, IdPoliza: IdPoliza});
-}
-
-function ModeloPoliza(poliza) {
-    return {
-        IdPoliza: poliza.IdPoliza,
-        IdCliente: poliza.IdCliente,
-        Nombre: poliza.Nombre,
-        Descripcion: poliza.Descripcion,
-        TipoCubrimiento: poliza.TipoCubrimiento,
-        PorcentajeCobertura: poliza.PorcentajeCobertura,
-        InicioVigencia: poliza.InicioVigencia,
-        PeriodoCobertura: poliza.PeriodoCobertura,
-        Precio: poliza.Precio,
-        TipoRiesgo: poliza.TipoRiesgo
-    }
-}
-
-function ModeloCliente(cliente) {
-    return {
-        IdCliente: cliente.IdCliente,
-        Nombre: cliente.Nombre,
-        Email: cliente.Email
-    }
 }

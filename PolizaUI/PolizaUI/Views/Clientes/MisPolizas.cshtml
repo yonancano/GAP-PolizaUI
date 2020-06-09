@@ -80,10 +80,9 @@
                                 @Html.DisplayFor(modelItem => item.TipoRiesgo)
                             </td>
                             <td>
-                                <div class="btn-group-vertical">
-                                    <input type="button" class="btn btn-primary" value="Editar"
-                                           onclick="cancelar(@item.IdCliente,@item.IdPoliza)" />
-                                </div>
+                                <form asp-action="Cancelar" method="post" asp-route-id=@item.IdPoliza>
+                                    <input type="submit" value="Cancelar" class="btn btn-danger" />
+                                </form>
                             </td>
                         </tr>
                     }
@@ -91,10 +90,10 @@
             </table>
         </div>
     </div>
-
-    <div class="btn-group">
-        @*<input type="button" class="btn btn-primary" value="Ascociar nueva"
-        onclick="getAsociar(@Model)" />*@
-        @Html.ActionLink("Asociar", "Asociar", new { @cliente = Model })
-    </div>
+    <form asp-action="Asignar" method="get" asp-route-id=@Model.IdCliente>
+        <div class="form-group">
+            <button type="submit" class="btn btn-success">Asignar</button>
+        </div>
+    </form>
+    
 </div>

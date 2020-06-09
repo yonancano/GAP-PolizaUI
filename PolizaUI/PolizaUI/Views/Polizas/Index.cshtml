@@ -79,18 +79,16 @@ else
                                     </td>
                                     <td>
                                         <div class="btn-group-vertical">
-                                        @*<input type="button" class="btn btn-primary" value="Editar"
-                                               onclick="editar(@item.IdPoliza)" />*@
-                                        @Html.ActionLink("Editar", "Editar", new { @id = item.IdPoliza }) |
-@Html.ActionLink("Detalles", "Detalles", new
-{ @id = item.IdPoliza }) |
-@Html.ActionLink("Eliminar", "Eliminar", new
-{ @id = item.IdPoliza })
-</div>
-</td>
-</tr>
-                                            }
-</tbody>
+                                            @*<input type="button" class="btn btn-primary" value="Editar"
+                                                onclick="editar(@item.IdPoliza)" />*@
+                                            @Html.ActionLink("Editar", "Editar", new { @id = item.IdPoliza })
+                                            @Html.ActionLink("Detalles", "Detalles", new { @id = item.IdPoliza })
+                                            @Html.ActionLink("Eliminar", "Eliminar", new { @id = item.IdPoliza })
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
                     </table>
                 </div>
             </div>

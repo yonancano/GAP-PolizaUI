@@ -7,7 +7,6 @@ namespace PolizaUI.Models
     public class Poliza
     {
         public int IdPoliza { get; set; }
-        public int IdCliente { get; set; }
 
         [Required(ErrorMessage = "Nombre es requerido")]
         [DisplayName("Nombre")]
@@ -40,5 +39,9 @@ namespace PolizaUI.Models
         [Required(ErrorMessage = "Tipo de riesgo es requerido")]
         [DisplayName("Riesgo")]
         public byte TipoRiesgo { get; set; }
+
+        [Required(ErrorMessage = "Id del cliente es requerido")]
+        [DisplayName("Id del cliente")]
+        public int IdCliente { get; set; }
     }
 }

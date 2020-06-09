@@ -29,6 +29,7 @@ namespace PolizaUI.Controllers
             try
             {
                 Cliente = ServicioCliente.ObtengaCliente(IdCliente).Result;
+                Cliente.MisPolizas = ServicioPoliza.ObtengaPolizasCliente(IdCliente).Result;
             }
             catch (Exception)
             {
@@ -38,24 +39,26 @@ namespace PolizaUI.Controllers
             return View("MisPolizas", Cliente);
         }
 
-        public ActionResult Asociar(Cliente cliente)
+        public ActionResult Asignar(int id)
         {
+            ViewBag.IDcliente = id;
             return View();
         }
 
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Asociar(int idCliente, Poliza poliza)
+        public ActionResult Asignar(Poliza poliza)
         {
             try
             {
-                ServicioCliente.AsociarPoliza(idCliente, poliza);
+                //validacion alta => 50%
+                ServicioPoliza.AsignarPoliza(poliza);
             }
             catch (Exception)
             {
 
-                throw new NotImplementedException("No se completó la acción asociar.");
+                throw new NotImplementedException("No se completó la acción Asignar.");
             }
 
             return RedirectToAction("Index");
@@ -63,15 +66,15 @@ namespace PolizaUI.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Cancelar(int idCliente, int idPoliza)
+        public ActionResult Cancelar(int id)
         {
             try
             {
-                ServicioCliente.CancelarPoliza(idCliente, idPoliza);
+                ServicioPoliza.CancelarPoliza(id);
             }
             catch
             {
-                throw new NotImplementedException("No se completó la acción cancelación.");
+                throw new NotImplementedException("No se completó la acción Cancelar.");
             }
 
             return RedirectToAction("Index");

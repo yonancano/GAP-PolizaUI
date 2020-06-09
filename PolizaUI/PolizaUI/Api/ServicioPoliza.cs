@@ -25,7 +25,7 @@ namespace PolizaUI.Api
                 client.DefaultRequestHeaders.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                var res = await client.GetAsync("/ObtengaPolizas/");
+                var res = await client.GetAsync("/Obtener/");
 
                 if (res.IsSuccessStatusCode)
                 {
@@ -48,7 +48,7 @@ namespace PolizaUI.Api
                 client.DefaultRequestHeaders.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                var res = await client.GetAsync("/ObtengaPoliza/"+ id);
+                var res = await client.GetAsync("/ObtenerPorId?id=" + id);
 
                 if (res.IsSuccessStatusCode)
                 {
@@ -60,6 +60,72 @@ namespace PolizaUI.Api
             return Poliza;
         }
 
+        public static async void AsignarPoliza(Poliza poliza)
+        {
+            //validacion alta => 50%
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(BaseUrl);
+                client.DefaultRequestHeaders.Clear();
+                StringContent content = new StringContent(JsonConvert.SerializeObject(poliza), Encoding.UTF8, "application/json");
+
+                using (var response = await client.PostAsync("/AsignePoliza", content))
+                {
+                    string apiResponse = await response.Content.ReadAsStringAsync();
+                }
+            }
+        }
+
+        public static async void CancelarPoliza(int id)
+        {
+            Poliza Poliza = new Poliza();
+
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(BaseUrl);
+                client.DefaultRequestHeaders.Clear();
+
+                //obtener poliza
+                var res = await client.GetAsync("/ObtenerPorId?id=" + id);
+
+                if (res.IsSuccessStatusCode)
+                {
+                    var response = await res.Content.ReadAsStringAsync();
+                    Poliza = JsonConvert.DeserializeObject<Poliza>(response);
+                }
+
+                //cancelar poliza
+                StringContent content = new StringContent(JsonConvert.SerializeObject(Poliza), Encoding.UTF8, "application/json");
+
+                using (var response = await client.PostAsync("/CancelePoliza", content))
+                {
+                    string apiResponse = await response.Content.ReadAsStringAsync();
+                }
+            }
+        }
+
+        public static async Task<List<Poliza>> ObtengaPolizasCliente(int id)
+        {
+
+            List<Poliza> Polizas = new List<Poliza>();
+
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(BaseUrl);
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                var res = await client.GetAsync("/ObtengaPolizasCliente/?id="+id);
+
+                if (res.IsSuccessStatusCode)
+                {
+                    var response = await res.Content.ReadAsStringAsync();
+                    Polizas = JsonConvert.DeserializeObject<List<Poliza>>(response);
+                }
+            }
+
+            return Polizas;
+        }
     }
 }
 
